@@ -1,0 +1,9 @@
+syntax:glob
+
+docs/_build
+build
+Astropysics.egg-info
+*.pyc
+*.egg
+*.tar.gz
+?noseids

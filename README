@@ -1,0 +1,38 @@
+PyModelFit
+===========
+
+A pythonic, object-oriented framework and GUI tool for fitting data to models.
+Web Page: http://packages.python.org/PyModelFit/
+License: Apache License v2.0
+
+Installation
+------------
+
+If you have numpy (http://numpy.scipy.org/) and scipy (http://www.scipy.org/) installed, just do
+
+python setup.py install
+
+On some linux distributions, this may need to be 
+
+sudo python setup.py install
+
+GUI Installation
+----------------
+
+The fitgui GUI interface requires the following additional packages:
+
+Traits (http://code.enthought.com/projects/traits/)
+TraitsGUI (http://code.enthought.com/projects/traits_gui/)
+Chaco (http://code.enthought.com/projects/chaco/)
+
+Instructions for installation can be found at these sites, or the Enthought Python Distribution contains the necessary packages.
+
+Documentation
+-------------
+
+Documentation (in the "docs" directory) is meant to be used with sphinx (http://sphinx.pocoo.org).  Typical usage is::
+
+python setup.py build_sphinx
+
+to build html documentation and place it in docs/_build/html.  Note that this requires Sphinx >=1.0
+
