@@ -39,9 +39,9 @@ cmdclassd = {}
 if mod_build_sphinx is not None:
     cmdclassd['build_sphinx'] = mod_build_sphinx
     
-setup(name='Astropysics',
+setup(name='PyModelFit',
       version=versionstr,
-      description='Astrophysics libraries for Python',
+      description='Data-fitting and Model-building package',
       packages=find_packages(),
       scripts=glob('scripts/*'),
       requires=['numpy','scipy'],

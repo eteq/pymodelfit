@@ -58,3 +58,9 @@ have the package already available on your system):
     * `Chaco <http://code.enthought.com/projects/chaco/>`_
         ``pip install chaco``
 
+Finally, Markov Chain Monte Carlo (MCMC) fitting is available for models via the
+:func:`pymodelfit.FunctionModel.getMCMC` method.  To work, this requires an 
+additional package:
+
+    * `pymc <http://code.google.com/p/pymc/>`_
+        ``pip install pymc``
