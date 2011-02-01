@@ -64,3 +64,30 @@ additional package:
 
     * `pymc <http://code.google.com/p/pymc/>`_
         ``pip install pymc``
+        
+
+Developing PyModelFit
+---------------------
+
+PyModelFit is an open source project, and contributions are welcome. The `google
+code hosting page <http://code.google.com/p/pymodelfit/>`_ has the development
+version of the source code, as well as the bug tracker.   Code guidelines are 
+the same as for the :mod:`astropysics` project, and are detailed 
+`at that project's documentation page.
+<http://packages.python.org/Astropysics/develop.html>`_
+
+You can get the latest version by installing `mercurial
+<http://mercurial.selenic.com/>`_ and running the command:
+
+    hg clone https://pymodelfit.googlecode.com/hg/ pymodelfit 
+    
+and installing it via:
+
+    python setup.py install
+    
+or:
+
+    python setup.py develop
+    
+If you want to easily edit the source code and immediately see your changes in
+the installed version.
