@@ -2,7 +2,7 @@ syntax:glob
 
 docs/_build
 build
-Astropysics.egg-info
+*.egg-info
 *.pyc
 *.egg
 *.tar.gz
