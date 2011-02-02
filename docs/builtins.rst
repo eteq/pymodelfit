@@ -1,5 +1,5 @@
-Reference: Builtins
-===================
+Builtins Module
+===============
 
 
 .. automodule:: pymodelfit.builtins

@@ -1,6 +1,7 @@
 syntax:glob
 
 docs/_build
+docs/core/*
 build
 *.egg-info
 *.pyc
