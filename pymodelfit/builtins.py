@@ -16,14 +16,22 @@
 This module contains builtin function models that use the framework of the
 :mod:`core` module.
 
-Classes and Inheritance Structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Class Inheritance Diagram
+-------------------------
+
+:mod:`builtins` includes a number of classes that are subclasses of classes from
+the :mod:`core` module. The relationship between these classes is shown in the
+diagram below.
 
 .. inheritance-diagram:: pymodelfit.builtins
    :parts: 1
    
-Module API
-^^^^^^^^^^
+Module Reference
+----------------
+
+Below is detailed documentation (including formulae) for all of the
+:mod:`builtins` classes.
+
 
 """
 

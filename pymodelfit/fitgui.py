@@ -38,8 +38,8 @@ from enthought.enable.api import ColorTrait,ComponentEditor
 
 
 
-from .core import FunctionModel1D,list_models,get_model_class, \
-                     get_model_instance,binned_weights
+from .core import FunctionModel1D,list_models,get_model_class,get_model_instance
+from .utils import binned_weights
 
 class ColorMapperFixSingleVal(ColorMapper):
     coloratval = ColorTrait('black')
