@@ -56,7 +56,8 @@ will need `Traits <http://code.enthought.com/projects/traits/>`_,
 Bug Reports
 ===========
 
-Please report any bugs encountered at FILL IN LINK.
+Please report any bugs encountered at the 
+`google code issue tracher <http://code.google.com/p/pymodelfit/issues/list>`_.
 
 Indices and tables
 ==================
