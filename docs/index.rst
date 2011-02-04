@@ -57,7 +57,7 @@ Bug Reports
 ===========
 
 Please report any bugs encountered at the 
-`google code issue tracher <http://code.google.com/p/pymodelfit/issues/list>`_.
+`bitbucket issue tracker <http://bitbucket.org/eteq/pymodelfit/issues>`_.
 
 Indices and tables
 ==================

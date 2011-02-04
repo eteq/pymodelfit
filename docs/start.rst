@@ -70,7 +70,7 @@ Developing PyModelFit
 ---------------------
 
 PyModelFit is an open source project, and contributions are welcome. The `google
-code hosting page <http://code.google.com/p/pymodelfit/>`_ has the development
+code hosting page <http://bitbucket.org/eteq/pymodelfit>`_ has the development
 version of the source code, as well as the bug tracker.   Code guidelines are 
 the same as for the :mod:`astropysics` project, and are detailed 
 `at that project's documentation page.
@@ -79,7 +79,7 @@ the same as for the :mod:`astropysics` project, and are detailed
 You can get the latest version by installing `mercurial
 <http://mercurial.selenic.com/>`_ and running the command:
 
-    hg clone https://pymodelfit.googlecode.com/hg/ pymodelfit 
+    hg clone http://bitbucket.org/eteq/pymodelfit pymodelfit 
     
 and installing it via:
 
