@@ -47,9 +47,9 @@ following package is suggested:
     * `Matplotlib <http://matplotlib.sourceforge.net/index.html>`_
         Can be installed with ``pip install matplotlib``
     
-To use the useful FitGUI interactive model-fitting tool, the following three
-packages are necessary (with the suggested install command, if you don't
-have the package already available on your system):
+To use the useful :class`~pymodelfit.fitgui.FitGui` interactive model-fitting
+tool, the following three packages are necessary (with the suggested install
+command, if you don't have the package already available on your system):
 
     * `Traits <http://code.enthought.com/projects/traits/>`_
         ``pip install traits``
@@ -57,6 +57,12 @@ have the package already available on your system):
         ``pip install traitsGUI``
     * `Chaco <http://code.enthought.com/projects/chaco/>`_
         ``pip install chaco``
+    
+For the :class`~pymodelfit.fitgui.MultiFitGui` model-fitting tool, another
+package is needed for 3D rendering:
+
+    * `Mayavi2 <http://code.enthought.com/projects/mayavi/>`_
+        ``pip install mayavi``
 
 Finally, Markov Chain Monte Carlo (MCMC) fitting is available for models via the
 :func:`pymodelfit.FunctionModel.getMCMC` method.  To work, this requires an 
