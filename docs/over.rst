@@ -103,10 +103,13 @@ external packages like :mod:`astropysics` that use models in some places, etc.)
 Module Organization
 -------------------
 
-The :mod:`pymodelfit` package is composed of two submodules that are
-both imported into the main module. The first, :mod:`~pymodelfit.core`
-contains the classes and functions that structure and do most of the work of the
-models. The second, :mod:`~pymodelfit.builtins` contains a default set
-of models. 
+The :mod:`pymodelfit` package is composed of two submodules that are both
+imported into the main module. The first, :mod:`~pymodelfit.core` contains the
+classes and functions that structure and do most of the work of the models. The
+second, :mod:`~pymodelfit.builtins` contains a default set of models. There are
+two additional modules that contain GUIs for interactive model-fitting. For
+single 1D models, the :mod:`~pymodelfit.fitgui` module contains the gui, while
+for a multi-variable fit, the :mod:`~pymodelfit.multifitgui` can fit multiple
+simultaneous 1D relations and display them in 3D.
 
     

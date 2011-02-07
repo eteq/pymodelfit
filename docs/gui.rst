@@ -14,6 +14,9 @@ plotting. The available models are those registered by the
 FitGui -- Interactive 1D model-fitting
 --------------------------------------
 
+Reference
+^^^^^^^^^
+
 .. autoclass:: pymodelfit.fitgui.FitGui
    :members:
    :undoc-members:
@@ -25,12 +28,15 @@ FitGui -- Interactive 1D model-fitting
 MultiFitGui -- Interactive fitting for multiple 1D models
 ---------------------------------------------------------
 
-Note that the MultiFitGui requires Mayavi for 3D plotting
+Note that the MultiFitGui requires Mayavi due to the need for 3D plotting.
 
-.. autoclass:: pymodelfit.fitgui.MultiFitGui
+Reference
+^^^^^^^^^
+
+.. autoclass:: pymodelfit.multifitgui.MultiFitGui
    :members:
    :undoc-members:
    :exclude-members: modelpanel,modelselector
 
 
-.. autofunction:: pymodelfit.fitgui.fit_data_multi
+.. autofunction:: pymodelfit.multifitgui.fit_data_multi
