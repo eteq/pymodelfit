@@ -1,13 +1,16 @@
 Core Module
 ===========
 
-.. automodule: pymodelfit.core
+.. module:: pymodelfit.core
 
+This module holds the base level classes for the data fitting/modeling
+framework used in astropysics. This is seperated from the implementations of
+specific models, which can be found in the :mod:`~pymodelfit.builtins` module.
 
 Class Inheritance Diagram
 -------------------------
 
-:mod:`core` includes a number of classes that are primarily inteded to be
+:mod:`pymodelfit.core` includes a number of classes that are primarily inteded to be
 subclassed by particular models.  The relationship between these classes is shown
 in the below diagram.
 
@@ -18,7 +21,6 @@ in the below diagram.
 Module Reference
 ----------------
 
-.. currentmodule:: pymodelfit.core
 
 Classes
 ^^^^^^^

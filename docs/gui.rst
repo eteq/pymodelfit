@@ -3,8 +3,8 @@ Fitgui -- Interactive Curve Fitting
 ===================================
 
 This module contains the interactive GUI curve-fitting tools. They are based on
-`Traits <http://code.enthought.com/projects/traits/>`_ and the `TraitsGUI
-<http://code.enthought.com/projects/traits_gui/>`. Plotting is provided through
+`Traits <http://code.enthought.com/projects/traits/>`_ and `TraitsGUI
+<http://code.enthought.com/projects/traits_gui/>`_. Plotting is provided through
 the `Chaco <http://code.enthought.com/projects/chaco/>`_ 2D plotting library ,
 and, optionally, `Mayavi <http://code.enthought.com/projects/mayavi/>`_ for 3D
 plotting. The available models are those registered by the
