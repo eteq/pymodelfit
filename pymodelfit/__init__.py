@@ -19,7 +19,7 @@ data to models.
 
 _release = True
 _majorversion = 0
-_minorversion = 1
+_minorversion = 2
 _bugfix = None
 version = str(_majorversion) + '.' + str(_minorversion) + \
           ('' if _bugfix is None else str(_bugfix)) + \
