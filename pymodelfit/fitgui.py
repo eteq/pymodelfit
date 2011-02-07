@@ -32,9 +32,15 @@ from enthought.chaco.api import Plot,ArrayPlotData,jet,ColorBar,HPlotContainer,\
                                 ColorMapper,LinearMapper,ScatterInspectorOverlay,\
                                 LassoOverlay,AbstractOverlay,ErrorBarPlot, \
                                 ArrayDataSource
-from enthought.chaco.tools.api import PanTool, ZoomTool,SelectTool,LassoSelection,\
-                                      ScatterInspector
+from enthought.chaco.tools.api import PanTool,SelectTool,LassoSelection,ScatterInspector
 from enthought.enable.api import ColorTrait,ComponentEditor
+from enthought.enable.base_tool import KeySpec
+try:
+    #I'm not certain when BetterSelectingZoom was implemented...
+    from enthought.chaco.tools.api import BetterSelectingZoom as ZoomTool
+except ImportError:
+    from enthought.chaco.tools.api import ZoomTool
+
 
 
 
@@ -305,7 +311,9 @@ class FitGui(HasTraits):
     modelselector = NewModelSelector
     ytype = Enum(('data and model','residuals'))
     
-    #selbutton = Button('Selection...')    
+    zoomtool = Instance(ZoomTool)
+    pantool = Instance(PanTool)
+      
     scattertool = Enum(None,'clicktoggle','clicksingle','clickimmediate','lassoadd','lassoremove','lassoinvert')
     selectedi = Property #indecies of the selected objects
     weightchangesel = Button('Set Selection To')
@@ -501,27 +509,20 @@ class FitGui(HasTraits):
         
         self.on_trait_change(self._rangeChanged,'plot.index_mapper.range.updated')
         
-        plot.tools.append(PanTool(plot,drag_button='left'))
-        plot.overlays.append(ZoomTool(plot))
-#        self.filloverlay = WeightFillOverlay(plot)
-#        if self.weights0rem:
-#            self.plot.overlays.append(self.filloverlay)
-        
+        self.pantool = PanTool(plot,drag_button='left')
+        plot.tools.append(self.pantool)
+        self.zoomtool = ZoomTool(plot)
+        self.zoomtool.prev_state_key = KeySpec('a')
+        self.zoomtool.next_state_key = KeySpec('s')
+        plot.overlays.append(self.zoomtool)
         
         self.scattertool = None
-        
-        #scatter.tools.append(ScatterInspector(scatter))
         self.scatter.overlays.append(ScatterInspectorOverlay(self.scatter, 
                         hover_color = "black",
                         selection_color="black",
                         selection_outline_color="red",
                         selection_line_width=2))
                         
-#        self.ls = lasso_selection = LassoSelection(component=scatter,selection_datasource=scatter.index)
-#        scatter.active_tool = lasso_selection
-#        lasso_overlay = LassoOverlay(lasso_selection=lasso_selection,
-#                                     component=scatter)
-#        scatter.overlays.append(lasso_overlay)
         
         self.colorbar = colorbar = ColorBar(index_mapper=LinearMapper(range=plot.color_mapper.range),
                                             color_mapper=plot.color_mapper.range,
