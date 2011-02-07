@@ -1445,6 +1445,8 @@ class FunctionModel1D(FunctionModel):
         Name of the output axis for this model.
     * :attr:`rangehint`
         A hint for the relevant range for this model as a (lower,upper) tuple.
+        If this needs to be computed from the current parameters of the model, 
+        it may be implemented as a property that returns a tuple.
         
     """    
     defaultIntMethod = 'quad'
