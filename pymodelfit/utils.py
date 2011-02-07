@@ -42,6 +42,8 @@ def mpl_context(show=None,clf=False,savefn=None):
         A string to save the figure to via the :func:`matplotlib.pyplot.savefig`
         function, or None to not save the figure.
     """
+    import matplotlib.pyplot as plt
+    
     if show is None:
         show = _mpl_show_default
     
