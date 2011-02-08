@@ -1,6 +1,6 @@
 
-Fitgui -- Interactive Curve Fitting
-===================================
+Interactive Curve Fitting -- GUI Tools
+======================================
 
 This module contains the interactive GUI curve-fitting tools. They are based on
 `Traits <http://code.enthought.com/projects/traits/>`_ and `TraitsGUI
