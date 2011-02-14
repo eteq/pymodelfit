@@ -17,10 +17,10 @@ pymodelfit -- a pythonic, object-oriented framework and GUI tool for fitting
 data to models.
 """
 
-_release = True
+_release = False
 _majorversion = 0
 _minorversion = 1
-_bugfix = 1
+_bugfix = 2
 version = str(_majorversion) + '.' + str(_minorversion) + \
           ('' if _bugfix is None else ('.'+str(_bugfix))) + \
           ('' if _release else 'dev')
