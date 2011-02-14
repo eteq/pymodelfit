@@ -25,7 +25,7 @@ set of builtin models.
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    
    start
    over
