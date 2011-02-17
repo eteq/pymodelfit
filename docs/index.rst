@@ -9,13 +9,12 @@ PyModelFit: model-fitting framework and GUI tool
 
 PyModelFit is a package that provides a pythonic, object-oriented framework 
 that simplifies the task of designing numerical models to fit data.  This
-is of course an incredibly broad task, and hence PyModelFit focuses on the
-simpler tasks of 1D curve-fitting and provides a wide range of models for
-that task, as well as a GUI interface to simplify interactive work.  There
-are classes provided for more general data types (2D to Scalar, 3D to Scalar,
-3D to 3D, and so on), but higher-dimensional models are generally more 
-application-specific and hence only the framework is provided and not a wide
-set of builtin models.
+is a very broad task, and hence the current functionality of PyModelFit focuses
+on the simpler tasks of 1D curve-fitting, including a GUI interface to simplify
+interactive work (using Enthought Traits). For more complicated modeling, 
+PyModelFit also provides a wide range of classes and a framework to support 
+more general model/data types (2D to Scalar, 3D to Scalar, 3D to 3D, and so 
+on).
 
 .. note ::
     This project is a spin off of 
