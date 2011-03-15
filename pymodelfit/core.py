@@ -3870,7 +3870,7 @@ def intersect_models(m1,m2,bounds=None,nsample=1024,full_output=False,**kwargs):
     else:
         return arr
 
-def scale_model(model,scaleparname='A'):
+def scale_model(model,scaleparname='A',scaleval=1):
     """
     A convinience function to generate a CompositeModel with a scaling 
     factor multiplying the wrapped model.
@@ -3880,9 +3880,9 @@ def scale_model(model,scaleparname='A'):
     
     :param model: the model to wrap (or a name of a model that will be created)
     :type model: :class:`FunctionModel` object or string
-    :param scaleparname:
+    :param string scaleparname:
         name for the parameter controlling the scaling factor
-    :type scaleparname: string
+    :param float scaleval:  The initial value for the scale parameter.
     
     :returns: a :class:`CompositeModel` (or subclass) object
     """
@@ -3893,19 +3893,21 @@ def scale_model(model,scaleparname='A'):
         compclass = CompositeModel1D
     else:
         compclass = CompositeModel
-    return compclass((model,'constant'),operation='*',
+    res = compclass((model,'constant'),operation='*',
                      parnames={'C1':scaleparname})
+    setattr(res,scaleparname,scaleval)
+    return res
 
-def offset_model(model,offsetparname='C'):
+def offset_model(model,offsetparname='C',offsetval=0):
     """
     A convinience to generate a CompositeModel with an additive offset 
     on the wrapped model (e.g. :math:`m(x)+C`). 
     
     :param model: the model to wrap (or a name of a model that will be created)
     :type model: :class:`FunctionModel` object or string
-    :param offsetparname:
+    :param string offsetparname:
         name for the parameter controlling the additive offset value
-    :type offsetparname: string
+    :param float offsetval:  The initial value for the offset parameter.
     
     :returns: a :class:`CompositeModel` (or subclass) object
     """
@@ -3916,22 +3918,24 @@ def offset_model(model,offsetparname='C'):
         compclass = CompositeModel1D
     else:
         compclass = CompositeModel
-    return compclass((model,'constant'),operation='+',
+    res = compclass((model,'constant'),operation='+',
                      parnames={'C1':offsetparname})
+    setattr(res,offsetparname,offsetval)
+    return res
                      
-def scale_and_offset_model(model,scaleparname='A',offsetparname='C'):
+def scale_and_offset_model(model,scaleparname='A',offsetparname='C',scaleval=1,offsetval=0):
     """
     A convinience function to generate a CompositeModel with a multiplicative
     scale and an additive offset on the wrapped model. (e.g. :math:`A m(x)+C`)
     
     :param model: the model to wrap (or a name of a model that will be created)
     :type model: :class:`FunctionModel` object or string
-    :param scaleparname:
+    :param string scaleparname:
         name for the parameter controlling the scaling factor
-    :type scaleparname: string
-    :param offsetparname:
+    :param string offsetparname:
         name for the parameter controlling the additive offset value
-    :type offsetparname: string
+    :param float scaleval:  The initial value for the scale parameter.
+    :param float offsetval:  The initial value for the offset parameter.
     
     :returns: a :class:`CompositeModel` (or subclass) object
     """
@@ -3944,6 +3948,9 @@ def scale_and_offset_model(model,scaleparname='A',offsetparname='C'):
         compclass = CompositeModel1D
     else:
         compclass = CompositeModel
-    return compclass((model,'constant','constant'),operation=['*','+'],
+    res = compclass((model,'constant','constant'),operation=['*','+'],
                      parnames={'C1':scaleparname,'C2':offsetparname})
+    setattr(res,scaleparname,scaleval)
+    setattr(res,offsetparname,offsetval)
+    return res
     
