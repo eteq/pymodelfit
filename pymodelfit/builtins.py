@@ -750,10 +750,14 @@ class SinModel(FunctionModel1DAuto):
     
 class TwoPowerModel(FunctionModel1DAuto):
     """
-    A model that smoothly transitions between two power laws at the turnover 
-    point xs.  a is the inner slope, b is the outer slope
-    A and fxs are the same parameter - A is the absolute normalization, and fxs
-    is the function's value at xs
+    A model that smoothly transitions between two power laws.
+    
+    The turnover point is given by the parameter `xs`. `a` is the inner slope,
+    `b` is the outer slope, and `A` is the overall normalization:
+    
+    .. math::
+        A x^a (x+xs)^{b-a}
+        
     """
     def f(self,x,A=1,xs=1,a=1,b=2):
         return A*((x+xs)**(b-a))*(x**a)
@@ -766,7 +770,9 @@ class TwoPowerModel(FunctionModel1DAuto):
         xs,a,b=self.xs,self.a,self.b
         self.A=fxs*xs**-b*2**(a-b)
     
-    fxs=property(fget=_getFxs,fset=_setFxs)
+    fxs=property(fget=_getFxs,fset=_setFxs,doc="""The function's value at 
+                 `xs`- this maps one-to-one onto the `A` parameter, so setting
+                 `fxs` also sets `A` (and vice versa).""")
     
     
 class TwoSlopeModel(FunctionModel1DAuto):

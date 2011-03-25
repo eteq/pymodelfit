@@ -1926,7 +1926,6 @@ class FunctionModel1D(FunctionModel):
                 v,e,d,m = res
                 from warnings import warn
                 warn('Integration message: %s'%m)
-                print 'Integration message:',m
         #use these for 2d and 3d
         #elif method=='dblquad':
         #    raise NotImplementedError
