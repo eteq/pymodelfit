@@ -384,6 +384,40 @@ class LinearModel(FunctionModel1DAuto):
         """
         self.pointSlope((y0-y1)/(x0-x1),x0,y0)
         
+    def distanceToPoint(self,xp,yp):
+        """
+        Computes the shortest distance from this line to a provided point or
+        points. 
+        
+        The distance is signed in the sense that a positive distance indicates
+        the point is above the line (y_point>y_model) while negative is below.
+            
+        
+        :param xp: The x-coordinate of the point(s).
+        :type xp: scalar or array-like
+        :param yp: The y-coordinate of the point(s). Length must match `xp`.
+        :type yp: scalar or array-like
+        
+        :returns:
+            The (signed) shortest distance from this model to the point(s). If
+            `xp` and `yp` are scalars, this will be a scalar.  Otherwise, it is
+            an array of shape matching `xp` and `yp`.            
+        
+        """
+        isscal = np.isscalar(xp)
+        xp = np.array(xp,copy=False)
+        yp = np.array(yp,copy=False)
+        
+        if xp.shape!=yp.shape:
+            raise ValueError("distanceToPoint xp and yp shapes don't match")
+        
+        res = (yp-self(xp))*(self.m**2+1)**-0.5
+        if isscal:
+            return res.ravel()[0] #regular instead of numpy scalar
+        else:
+            return res
+        
+        
     @staticmethod
     def fromPowerLaw(plmod,base=10):
         """
