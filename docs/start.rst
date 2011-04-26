@@ -47,7 +47,7 @@ following package is suggested:
     * `Matplotlib <http://matplotlib.sourceforge.net/index.html>`_
         Can be installed with ``pip install matplotlib``
     
-To use the useful :class`~pymodelfit.fitgui.FitGui` interactive model-fitting
+To use the useful :class:`~pymodelfit.fitgui.FitGui` interactive model-fitting
 tool, the following three packages are necessary (with the suggested install
 command, if you don't have the package already available on your system):
 
@@ -58,7 +58,7 @@ command, if you don't have the package already available on your system):
     * `Chaco <http://code.enthought.com/projects/chaco/>`_
         ``pip install chaco``
     
-For the :class`~pymodelfit.fitgui.MultiFitGui` model-fitting tool, another
+For the :class:`~pymodelfit.fitgui.MultiFitGui` model-fitting tool, another
 package is needed for 3D rendering:
 
     * `Mayavi2 <http://code.enthought.com/projects/mayavi/>`_
@@ -75,19 +75,19 @@ additional package:
 Developing PyModelFit
 ---------------------
 
-PyModelFit is an open source project, and contributions are welcome. The `google
-code hosting page <http://bitbucket.org/eteq/pymodelfit>`_ has the development
+PyModelFit is an open source project, and contributions are welcome. The `git hub 
+project page <http://github.com/eteq/pymodelfit>`_ has the development
 version of the source code, as well as the bug tracker.   Code guidelines are 
 the same as for the :mod:`astropysics` project, and are detailed 
 `at that project's documentation page.
 <http://packages.python.org/Astropysics/develop.html>`_
 
-You can get the latest version by installing `mercurial
-<http://mercurial.selenic.com/>`_ and running the command:
+You can get the latest version by installing `git
+<http://git-scm.com/>`_ and running the command:
 
-    hg clone http://bitbucket.org/eteq/pymodelfit pymodelfit 
+    git clone git://github.com/eteq/pymodelfit.git 
     
-and installing it via:
+then install it via:
 
     python setup.py install
     
@@ -95,5 +95,5 @@ or:
 
     python setup.py develop
     
-If you want to easily edit the source code and immediately see your changes in
+Use the second option if you want to easily edit the source code and immediately see your changes in
 the installed version.
