@@ -1,8 +1,7 @@
-syntax:glob
 
-docs/_build
+docs/_build/**/*
 docs/core/*
-build
+build/**/*
 *.egg-info
 *.pyc
 *.egg
