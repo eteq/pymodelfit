@@ -17,7 +17,7 @@ pymodelfit -- a pythonic, object-oriented framework and GUI tool for fitting
 data to models.
 """
 
-_release = True
+_release = False
 _majorversion = 0
 _minorversion = 2
 _bugfix = None
