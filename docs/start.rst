@@ -75,7 +75,7 @@ additional package:
 Developing PyModelFit
 ---------------------
 
-PyModelFit is an open source project, and contributions are welcome. The `git hub 
+PyModelFit is an open source project, and contributions are welcome. The `github 
 project page <http://github.com/eteq/pymodelfit>`_ has the development
 version of the source code, as well as the bug tracker.   Code guidelines are 
 the same as for the :mod:`astropysics` project, and are detailed 
