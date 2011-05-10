@@ -1,21 +1,21 @@
 #!/usr/bin/env python
 from __future__ import division,with_statement
 import numpy as np
-from astropysics import models
+from pymodelfit import core
 
 def test_1d_model_funcs():    
-    for modname in models.list_models(baseclass=models.FunctionModel1D):
-        cls = models.get_model_class(modname)
+    for modname in core.list_models(baseclass=core.FunctionModel1D):
+        cls = core.get_model_class(modname)
         # ignore datacentric models because they are data-dependant
-        if not issubclass(cls,models.DatacentricModel1D):
+        if not issubclass(cls,core.DatacentricModel1D):
             #test both ways of generating the model instance
-            if models.get_model_class(modname).isVarnumModel():
+            if core.get_model_class(modname).isVarnumModel():
                 #just try it w/ 3 variable arguments w/ default values
                 mod = cls(3,)
-                mod = models.get_model_instance(modname,nvarparams=3)
+                mod = core.get_model_instance(modname,nvarparams=3)
             else:
                 mod = cls()
-                mod = models.get_model_instance(modname)
+                mod = core.get_model_instance(modname)
                 
             if mod.rangehint is None:
                 x1 = 0

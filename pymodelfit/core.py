@@ -1508,7 +1508,7 @@ class FunctionModel1D(FunctionModel):
         This finds the x value of the (very simple) function :math:`y(x) = 4x+2`
         at the point y=3
         
-        >>> from astropysics.models import LinearModel
+        >>> from pymodelfit.builtins import LinearModel
         >>> m = LinearModel(m=4,b=2)
         >>> '%.2f'%m.inv(3)
         '0.25'
@@ -1517,7 +1517,7 @@ class FunctionModel1D(FunctionModel):
         inverse of :math`y(x) = x^2` for 2,9,and 16, respectively (i.e. they
         should give sqrt(2),3, and 4)
         
-        >>> from astropysics.models import QuadraticModel
+        >>> from pymodelfit.builtins import QuadraticModel
         >>> m = QuadraticModel()
         >>> '%.2f'%m.inv(2,1)
         '1.41'
