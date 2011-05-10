@@ -115,9 +115,9 @@ class ParametricModel(object):
                 e.args = ('invalid type for model data',)
                 raise
     data = property(_getData,_setData,doc="""
-    `data` should be either None, or a tuple(datain,dataout,weights). Note that
-    the weights are interpreted statistically as errors based on the
-    `weightstype` attribute.
+    The fitting data for this model. Should be either None, or a
+    tuple(datain,dataout,weights). Note that the weights are interpreted
+    statistically as errors based on the `weightstype` attribute.
     """)
     
     def _getWeightstype(self):
@@ -176,8 +176,9 @@ class ParametricModel(object):
                 raise ValueError('Errors do not match data shape')
         self.data[2] = _err_to_weights(val)
     errors = property(_getErrors,_setErrors,doc="""
-    Sets the weights on `data` assuming the interpretation for errors given by
-    `weightstype`. If `data` is None/missing, a TypeError will be raised. 
+    Error on the data. Sets the weights on `data` assuming the interpretation
+    for errors given by `weightstype`. If `data` is None/missing, a TypeError
+    will be raised.
     """)
     
     
@@ -388,8 +389,8 @@ class FunctionModel(ParametricModel):
     
     rangehint = None
     """
-    A hint for the relevant range for this model in the form 
-    (dim0lower,dim0upper,dim1lower,dim1upper,...) or None for no hint
+    A hint for the relevant range for this model.  Should take the form 
+    (dim0lower,dim0upper,dim1lower,dim1upper,...) or None for no hint.
     """
     
     @abstractmethod
@@ -434,7 +435,7 @@ class FunctionModel(ParametricModel):
             If the input or output are incorrect type or dimensionality for this
             model.
         
-        ..note ::
+        .. note ::
             If a subclass overrides this method to do type-checking, it should 
             either call this method or call :meth:`_filterfunc` with an array
             input and raise a ModelTypeError if there is a type problem 
@@ -784,13 +785,14 @@ class FunctionModel(ParametricModel):
     
     def stdData(self,x=None,y=None):
         """
-        Determines the standard deviation of the model from the supplied data
+        Determines the standard deviation of the model from data. Data can
+        either be provided or (by default) will be taken from the stored
+        |attrdata|.
         
-        :param x: Input data value or None to use stored |attrdata|
+        :param x: Input data value or None to use stored |attrdata|.
         :type x: array-like or None
-        :param y: Output data value or None to use stored |attrdata|
+        :param y: Output data value or None to use stored |attrdata|.
         :type y: array-like or None
-        
         
         :returns: standard deviation of model from `y`
         
@@ -807,7 +809,7 @@ class FunctionModel(ParametricModel):
     
     def residuals(self,x=None,y=None,retdata=False):
         """
-        Compute residuals of the provided data against the model, e.g.
+        Compute residuals of the provided data against the model. E.g.
         :math:`y-{\\rm model}(x)`.
         
         :param x: Input data value or None to use stored |attrdata|
@@ -918,10 +920,10 @@ class FunctionModel(ParametricModel):
                           modely=False,n=250,prefit=True, medianpars=False,
                           plothist=False,**kwargs):
         """
-        Uses the fitData function to fit the function many times while 
-        either using the  "bootstrap" technique (resampling w/replacement),
-        monte carlo estimates for the error, or both to estimate the error
-        in the fit.
+        Estimates errors via resampling. Uses the fitData function to fit the
+        function many times while either using the "bootstrap" technique
+        (resampling w/replacement), monte carlo estimates for the error, or both
+        to estimate the error in the fit.
         
         :param x: 
             The input data - if None, will be taken from the |attrdata|
@@ -1076,10 +1078,9 @@ class FunctionModel(ParametricModel):
     
     def getMCMC(self,x,y,priors={},datamodel=None):
         """
-        Generate an object to fit the data using Markov Chain Monte Carlo
-        sampling. This function requires the `PyMC
-        <http://code.google.com/p/pymc/>`_ package for the MCMC internals and
-        sampling.
+        Generate an Markov Chain Monte Carlo sampler for the data and model.
+        This function requires the `PyMC <http://code.google.com/p/pymc/>`_
+        package for the MCMC internals and sampling.
         
         :param x: Input data value
         :type x: array-like
@@ -1595,7 +1596,7 @@ class FunctionModel1D(FunctionModel):
     
     def findroot(self,x0,method='fmin',**kwargs):
         """
-        Finds a root for the model (i.e. location where the model is 0)
+        Finds a root for the model (location where the model is 0).
         
         :param x0: The location to start the search
         :type x0: float
@@ -1612,7 +1613,7 @@ class FunctionModel1D(FunctionModel):
     
     def findval(self,val,x0,method='fmin',**kwargs):
         """
-        Finds where the model is equal to the value given by the val argument
+        Finds where the model is equal to a specified value.
         
         x0 is the location to start the search
         method can be 'fmin' or 'fmin_powell' (from scipy.optimize)
@@ -1623,7 +1624,7 @@ class FunctionModel1D(FunctionModel):
         
     def _optimize(self,x0,type,method,**kwargs):
         """
-        find an optimal value for the model - x0 is where to start the search
+        Find an optimal value for the model - x0 is where to start the search
         type can be 'min','max','root',or 'saddle'
         method can be 'fmin' or 'fmin_powell'
         """
@@ -1860,15 +1861,14 @@ class FunctionModel1D(FunctionModel):
     #Can Override:
     def integrate(self,lower,upper,method=True,n=100,jac=None,**kwargs):
         """
-        Numerically compute the definite integral of the model using
-        :mod:`scipy.integrate` functions. The integral computed is:
+        Compute the definite integral of this model. This implememntation
+        numerically estimates the integral using :mod:`scipy.integrate`
+        functions. The integral computed is:
         
         .. math::
             \\int_l^u \\! f(x) \\, j(x) \\, dx
         
         where :math:`j(x)` is the jacobian set from the `jac` argument.
-        
-        
         
         :param lower: the lower limit of the integral
         :type lower: float
@@ -1963,8 +1963,9 @@ class FunctionModel1D(FunctionModel):
     
     def integrateCircular(self,lower,upper,*args,**kwargs):
         """
-        This is a convinience for self.integrate with jacobian set for a
-        azimuthally symmetric 2D radial profile.  
+        Integrate this model on the 2D circle. This calls :meth:`integrate` with
+        the jacobian set appropriately assuming the model is the radial profile
+        for an azimuthally symmetric 2D surface density.
         
         .. math::
             \\int_l^u \\! f(x) \\, 2 \\pi x \\, dx
@@ -1980,9 +1981,10 @@ class FunctionModel1D(FunctionModel):
     
     def integrateSpherical(self,lower,upper,*args,**kwargs):
         """
-        This is a convinience for self.integrate with jacobian set for a
-        spherically symmetric 3D radial profile.  
-        
+        Integrate this model on the 3D sphere. This calls :meth:`integrate` with
+        the jacobian set appropriately assuming the model is the radial profile
+        for a spherically symmetric 3D density.
+                
         .. math::
             \\int_l^u \\! f(x) \\, 4 \\pi x^2 \\, dx
         
@@ -1997,7 +1999,8 @@ class FunctionModel1D(FunctionModel):
         
     def derivative(self,x,dx=None):
         """
-        The numerically estimated derivative at x of the form:
+        Compute the derivative. This implementation numerically estimates the
+        derivative at x using the following formula:
         
         .. math::
             \\frac{df}{dx} \\approx \\frac{f(x+\\Delta x)-f(x)}{\\Delta x}
@@ -2032,8 +2035,9 @@ class FunctionModel1D(FunctionModel):
     
     def pixelize(self,xorxl,xu=None,n=None,edge=False,sampling=None):
         """
-        This method integrates over the model for a number of ranges
-        to get a 1D "pixelized" (i.e. discretized) version of the model.  
+        Generate a discretized version o the model. This method integrates over
+        the model for a number of ranges to get a 1D "pixelized" version of the
+        model.
         
         :param xoroxl: 
             If array, specifies the location of each of the pixels. If float,
