@@ -438,7 +438,7 @@ class FitGui(HasTraits):
         
         :param model: the initial model to use to fit this data
         :type model:
-            None, string, or :class:`astropysics.models.core.FunctionModel1D`
+            None, string, or :class:`pymodelfit.core.FunctionModel1D`
             instance. 
         :param include_models: 
             With `exclude_models`, specifies which models should be available in
@@ -448,7 +448,7 @@ class FitGui(HasTraits):
             the "new model" dialog (see `models.list_models` for syntax).
         :param fittype: 
             The fitting technique for the initial fit (see
-            :class:`astropysics.models.core.FunctionModel`). 
+            :class:`pymodelfit.core.FunctionModel`). 
         :type fittype: string
         
         kwargs are passed in as any additional traits to apply to the
@@ -942,7 +942,7 @@ class FitGui(HasTraits):
         """
         Gets the underlying object representing the model for this fit.
         
-        :returns: The :class:`astropysics.models.core.FunctionModel1D` object.
+        :returns: The :class:`pymodelfit.core.FunctionModel1D` object.
         """
         return self.tmodel.model
     
@@ -968,7 +968,7 @@ def fit_data(*args,**kwargs):
     :type ydata: array-like
     :param model: the initial model to use to fit this data
     :type model: 
-        None, string, or :class:`astropysics.models.core.FunctionModel1D`
+        None, string, or :class:`pymodelfit.core.FunctionModel1D`
         instance
         
     kwargs are passed into the fitgui initializer
