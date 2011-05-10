@@ -55,8 +55,8 @@ will need `Traits <http://code.enthought.com/projects/traits/>`_,
 Bug Reports
 ===========
 
-Please report any bugs encountered at the 
-`bitbucket issue tracker <http://bitbucket.org/eteq/pymodelfit/issues>`_.
+Please report any bugs encountered to the 
+`github issue tracker <http://github.com/eteq/pymodelfit/issues>`_.
 
 Indices and tables
 ==================

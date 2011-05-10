@@ -372,9 +372,8 @@ class FunctionModel(ParametricModel):
         call :meth:`f` and have the same type of return value.
       
     If type-checking is to be performed on the input, it should be performed in
-    :meth:`__call__` (see docstring for :meth:`__call__` for syntax), generally
-    using :func:`astropysics.utils.check_type`, but any mandatory input
-    *conversion* should be done in :meth:`_filterfunc`.
+    :meth:`__call__` (see docstring for :meth:`__call__` for syntax), but any
+    mandatory input *conversion* should be done in :meth:`_filterfunc`.
     """
     
     defaultparval = 1

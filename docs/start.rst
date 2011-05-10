@@ -16,7 +16,7 @@ Follow the instructions on those sites, or, far easier, install them as packages
 Install
 -------
 
-Once you have the requirements satisfied, you have a few options for installing astropysics.  
+Once you have the requirements satisfied, you have a few options for installing pymodelfit.  
 
 .. note::
     On most unix-like systems, you will need to either execute these commands as the root user, or preface them with ``sudo``.
