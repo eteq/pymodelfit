@@ -260,3 +260,4 @@ rst_prolog = """
 """
 
 autosummary_generate = True
+autodoc_default_flags = ['show-inheritance']
