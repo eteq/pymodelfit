@@ -18,9 +18,9 @@
 #TODO: refine ModelGrid, tying into util grid inverter
 
 """
-This module holds the base level classes for the data fitting/modeling framework
-used in astropysics. This is seperated from the implementations of specific
-models, which can be found in the :mod:`builtins` module.
+This module holds the base level classes for the pymodelfit data
+fitting/modeling framework. This is seperated from the implementations of
+specific models, which can be found in the :mod:`builtins` module.
 """
 
 from __future__ import division,with_statement
@@ -210,10 +210,11 @@ class _AutoParameter(object):
     def __get__(self,obj,owner):
         try:
             return getattr(obj,'_AutoParameter__'+self.name)
-        except AttributeError: #if data doesn't exist, initialize to default and return it
-             setattr(obj,'_AutoParameter__'+self.name,self.defaultvalue)
-             return self.defaultvalue
-    
+        except AttributeError: #if data doesn't exist, initialize to default and return it        
+            if obj is not None:
+                setattr(obj,'_AutoParameter__'+self.name,self.defaultvalue)
+            return self.defaultvalue
+            
     def __set__(self,obj,value):
         if isinstance(value,np.ndarray) and value.shape == ():
             pass
