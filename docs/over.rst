@@ -142,8 +142,10 @@ fits.
 
     qm = QuadraticModel()
     qm.fitData(x,yr)
-    print 'Fitted parameters:',qm.pardict
     qm.plot()
+    plt.text(0,11,'Quadratic Model:',fontsize=16)
+    for i,k in enumerate(qm.pardict):
+        plt.text(0,10-i,'%s=%f'%(k,qm.pardict[k]),fontsize=16)
     plt.show()
 
 Creating a Custom Model
