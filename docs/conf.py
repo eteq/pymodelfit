@@ -25,11 +25,11 @@ needs_sphinx = '1.0'
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx', 'sphinx.ext.pngmath', 
-              'sphinx.ext.viewcode', 'sphinx.ext.inheritance_diagram', 
-              'sphinx.ext.autosummary','sphinx.ext.doctest',
-   'matplotlib.sphinxext.only_directives','matplotlib.sphinxext.plot_directive',
-            'sphinx.ext.coverage']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx',
+              'sphinx.ext.pngmath', 'sphinx.ext.viewcode', 
+              'sphinx.ext.inheritance_diagram','sphinx.ext.autosummary',
+              'sphinx.ext.doctest','matplotlib.sphinxext.only_directives',
+              'matplotlib.sphinxext.plot_directive','sphinx.ext.coverage']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
