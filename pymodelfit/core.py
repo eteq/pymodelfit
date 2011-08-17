@@ -837,7 +837,7 @@ class FunctionModel(ParametricModel):
             return y-self(x)
     
     _fitchi2 = None #option to save so that fitData can store a chi2 if desired
-    def chi2Data(self,x=None,y=None,weights=None):
+    def chi2Data(self,x=None,y=None,weights=None,ddof=1):
         """
         Computes the chi-squared statistic for the data assuming this model.
         
@@ -849,18 +849,16 @@ class FunctionModel(ParametricModel):
             Weights to adjust chi-squared, typically for error bars.
             Statistically interpreted based on the `weightstype` attribute. If
             None, any stored |attrdata| will be used.
+        :param int ddof:
+            Delta Degrees of Freedom. The divisor used for the reduced chi-squared
+            is ``n-m-ddof``, where N is the number of points and m is the
+            number of parameters in the model.
         :type weights: array-like or None
         
         :returns: tuple of floats (chi2,reducedchi2,p-value)
         
-        If both are None, the internal data is used. In some cases the
-        chi-squared statistic may be pre-computed in the fitting step rather
-        than in this method.
-        
-        weights are taken here to be inverse-error
         
         
-        returns chi2,reducedchi2,p-value
         """
         from scipy.stats import chisqprob
         
@@ -868,7 +866,11 @@ class FunctionModel(ParametricModel):
         if x is None or y is None:
             if self.data is None:
                 raise ValueError('must either specify data or save fitted data')
-            x,y,weights = self.data
+            if weights is None:
+                x,y,weights = self.data
+            else:
+                x,y = self.data[:2]
+                weights = np.array(weights)
             if self._fitchi2 is not None:
                 chi2 = self._fitchi2
         
@@ -877,7 +879,7 @@ class FunctionModel(ParametricModel):
         
         n=len(y)
         m=len(self.params)
-        dof=n-m-1 #extra 1 because the distribution must sum to n
+        dof=n-m-ddof #extra 1 because the distribution must sum to n
         
         if chi2 is None:
             if weights is None:
@@ -911,7 +913,7 @@ class FunctionModel(ParametricModel):
             cov = self.lastfit[1]
         except:
             raise ValueError('No fit has been performed or the fitting type does not support covariance matricies.')
-        rchi2 = self.chi2Data()[1]
+        rchi2 = self.chi2Data(weights=1,ddof=0)[1]
         
         return cov*rchi2
     
