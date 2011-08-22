@@ -2732,7 +2732,7 @@ class ModelSequence(object):
             if legend and isinstance(legend,basestring):
                 labelpars = legend.split(',')
             else:
-                labelpars = list(m.pardict)
+                labelpars = list(self.models[-1].pardict)
                 if self._extraparams is not None:
                     labelpars.extend(self._extraparams)
             
