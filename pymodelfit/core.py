@@ -1622,12 +1622,48 @@ class FunctionModel1D(FunctionModel):
         """
         kwargs['valtofind'] = val
         return self._optimize(x0,'val',method,**kwargs)
-        
+    
     def _optimize(self,x0,type,method,**kwargs):
         """
         Find an optimal value for the model - x0 is where to start the search
-        type can be 'min','max','root',or 'saddle'
-        method can be 'fmin' or 'fmin_powell'
+        type can be 'min','max','root',or 'saddle'.
+        method can be 'fmin' or 'fmin_powell'.
+        """
+        from scipy.optimize import fmin,fmin_powell
+        
+        if type == 'min':
+            g=lambda x:self(x)
+        elif type == 'max':
+            g=lambda xs:-1*self(x)
+        elif type == 'root':
+            g=lambda x:np.abs(self(x))
+        elif type == 'val':
+            val = kwargs.pop('valtofind')
+            g=lambda x:np.abs(self(x)-val)
+        elif type == 'saddle':
+            raise NotImplementedError
+        else:
+            raise ValueError('Unrecognized optimization type')
+        
+        if method == 'fmin':
+            res = fmin(g,x0,**kwargs)
+        elif method == 'fmin_powell':
+            res = fmin_powell(g,x0,**kwargs)
+        else:
+            raise ValueError('Unrecognized method')
+        
+        self.lastOpt = res
+        return res[0]
+    
+    def _optimize_f(self,x0,type,method,**kwargs):
+        """
+        Find an optimal value for the model - x0 is where to start the search
+        type can be 'min','max','root',or 'saddle'.
+        method can be 'fmin' or 'fmin_powell'.
+        
+        Note that this optimizes the model function itself, *not* the function that
+        :meth:`setCall` uses. To behave correctly with :meth:`setCall`, use
+        :meth:`_optimize`.
         """
         from scipy.optimize import fmin,fmin_powell
         
