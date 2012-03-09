@@ -495,7 +495,8 @@ class FunctionModel(ParametricModel):
     """
     
     _optfittypes = ('leastsq','fmin','fmin_powell','fmin_cg','fmin_bfgs',
-                 'fmin_ncg','anneal','global','brute')
+                 'anneal','global','fmin_l_bfgs_b','fmin_tnc','fmin_cobyla',
+                 'fmin_slsqp')
     @property
     def fittypes(self):
         """
@@ -741,7 +742,7 @@ class FunctionModel(ParametricModel):
                     g=lambda v,x,y:np.prod(wf(v)*g1(v,x,y),axis=None)
                 else:
                     raise ValueError('no valid contraction method provided')
-                    
+
                 if method == 'fmin':
                     res=opt.fmin(g,v,(x,y),**kwargs)
                 elif method == 'fmin_powell':
@@ -752,16 +753,26 @@ class FunctionModel(ParametricModel):
                 elif method == 'fmin_bfgs':
                     #TODO:smartly include derivative
                     res=opt.fmin_bfgs(g,v,args=(x,y),**kwargs)
-                elif method == 'fmin_ncg':
-                    raise NotImplementedError
-                    #TODO:needs gradient and hessian
-                    opt.fmin_ncg
+                elif method == 'fmin_l_bfgs_b':
+                    #TODO:smartly include derivative
+                    del kwargs['full_output']
+                    kwargs['approx_grad'] = True
+                    res=opt.fmin_l_bfgs_b(g,v,args=(x,y),**kwargs)
+                elif method == 'fmin_tnc':
+                    #TODO:smartly include derivative
+                    del kwargs['full_output']
+                    kwargs['approx_grad'] = 1
+                    res=opt.fmin_tnc(g,v,args=(x,y),**kwargs)
+                elif method == 'fmin_cobyla':
+                    #TODO:smartly include derivative
+                    del kwargs['full_output']
+                    res=opt.fmin_cobyla(g,v,args=(x,y),**kwargs)
+                    res = [res]
+                elif method == 'fmin_slsqp':
+                    #TODO:smartly include derivative
+                    res=opt.fmin_slsqp(g,v,args=(x,y),**kwargs)
                 elif method == 'anneal' or method == 'global':
                     res=opt.anneal(g,v,args=(x,y),**kwargs)
-                elif method == 'brute':
-                    raise NotImplementedError
-                    #TODO: set parrange smartly
-                    res=opt.brute(g,parrange,(x,y),**kwargs)
                 else:
                     raise ValueError('Unrecognzied method %s'%method)
             
