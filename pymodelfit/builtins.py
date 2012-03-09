@@ -1001,6 +1001,16 @@ class SmoothSplineModel(DatacentricModel1DAuto):
         
         return self.spline(x)
     
+    def derivative(self, x, dx=None, nderivs=1):
+        """
+        Compute the derivative of this spline at the requested points.
+        
+        `order` specifies the number of derivatives to take - e.g. ``1`` gives
+        the first derivative, ``2`` is the second, etc.  This can go up to the
+        number of degrees in the spline+1 (e.g. a cubic spline can go up to 4)
+        """
+        return np.array([self.spline.derivatives(xi)[order] for xi in x])
+        
     @property
     def rangehint(self):
         xd = self.data[0]
@@ -1065,7 +1075,17 @@ class InterpolatedSplineModel(DatacentricModel1DAuto):
             self.fitSpline(xd,yd,weights=weights)
         
         return self.spline(x)
-    
+        
+    def derivative(self, x, dx=None, nderivs=1):
+        """
+        Compute the derivative of this spline at the requested points.
+        
+        `order` specifies the number of derivatives to take - e.g. ``1`` gives
+        the first derivative, ``2`` is the second, etc.  This can go up to the
+        number of degrees in the spline+1 (e.g. a cubic spline can go up to 4)
+        """
+        return np.array([self.spline.derivatives(xi)[order] for xi in x])
+        
     @property
     def rangehint(self):
         xd = self.data[0]
@@ -1129,6 +1149,16 @@ class _KnotSplineModel(DatacentricModel1DAuto):
             
         sorti = np.argsort(x)    
         return super(_KnotSplineModel,self).fitData(x[sorti],y[sorti],**kwargs)
+    
+    def derivative(self, x, dx=None, nderivs=1):
+        """
+        Compute the derivative of this spline at the requested points.
+        
+        `order` specifies the number of derivatives to take - e.g. ``1`` gives
+        the first derivative, ``2`` is the second, etc.  This can go up to the
+        number of degrees in the spline+1 (e.g. a cubic spline can go up to 4)
+        """
+        return np.array([self.spline.derivatives(xi)[order] for xi in x])
     
     @property
     def rangehint(self):
