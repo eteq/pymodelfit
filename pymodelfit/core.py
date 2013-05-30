@@ -1087,34 +1087,34 @@ class FunctionModel(ParametricModel):
             for p,v in d.iteritems():
                 setattr(self,p,np.median(v))
         return d,np.cov([d[p] for p in self.params])
-    
+
     def getMCMC(self,x,y,priors={},datamodel=None):
         """
         Generate an Markov Chain Monte Carlo sampler for the data and model.
         This function requires the `PyMC <http://code.google.com/p/pymc/>`_
         package for the MCMC internals and sampling.
-        
+
         :param x: Input data value
         :type x: array-like
         :param y: Output data value
         :type y: array-like
-        :param priors: 
+        :param priors:
             Maps parameter names to the priors to assume for that parameter.
             There *must* be an entry for every parameter in the model. The prior
             specification can be in any of the following forms:
-            
+
             * A :class:`pymc.Stochastric` object
             * A 2-tuple (lower,upper) for a uniform prior
-            * A scalar > 0 to use a gaussian prior of the provided width 
+            * A scalar > 0 to use a gaussian prior of the provided width
               centered at the current value of the parameter
-            * 0 for a Poisson prior with k set by the current value of the 
+            * 0 for a Poisson prior with k set by the current value of the
               parameter
-            
+
         :type priors: dictionary
         :param datamodel:
             Specifies the model to assume for the fitting data points.  May
             be any of the following:
-            
+
             * None
                 A normal distribution with sigma given by the data's standard
                 deviation.
@@ -1129,20 +1129,20 @@ class FunctionModel(ParametricModel):
                 specified by the sequence. The length must match the model.
             * A scalar
                 A normal distribution with the given standard deviation.
-        
+
         :except ValueError: If a prior is not provided for any parameter.
-        
+
         :returns: A :class:`pymc.MCMC` object ready to sample for this model.
-        
+
         """
         import pymc
         from operator import isSequenceType
         from inspect import getargspec
         from types import MethodType
-        
+
         if set(priors.keys()) != set(self.params):
             raise ValueError("input priors don't match function params")
-        
+
         d={}
         for k,v in priors.iteritems():
             if isinstance(v,pymc.StochasticBase):
@@ -1158,37 +1158,43 @@ class FunctionModel(ParametricModel):
                 d[k] = pymc.distributions.Poisson(k,self.pardict[k])
             else:
                 raise ValueError("couldn't interpret prior "+str(v))
-        
+
         funcdict=dict(d)
         if type(self.f) is MethodType:
             xstr = getargspec(self.f)[0][1]
         else:
             assert callable(self.f),'object function is not a callable'
-            xstr = getargspec(self.f)[0][0] 
+            xstr = getargspec(self.f)[0][0]
         funcdict[xstr]=x
         funcdet=pymc.Deterministic(name='f',eval=self.f,parents=funcdict,doc="FunctionModel1D function")
         d['f'] = funcdet
-        
+
         if type(datamodel) is tuple:
             distobj,dataarg,kwargs=datamodel
             if 'name' not in kwargs:
                 kwargs['name'] = 'data'
-                
+
             kwargs[dataarg] = funcdet
             kwargs['observed'] = True
             kwargs['value'] = y
-            
+
             datamodel = distobj(**kwargs)
+
+            d[datamodel.__name__] = datamodel
+
+            #now if any stochastics are in the kwargs, assume they are part of the model
+            for k, v in kwargs.iteritems():
+                if isinstance(v, pymc.StochasticBase):
+                    d[k] = v
         else:
             if datamodel is None:
                 sig = np.std(y)
             else:
-                sig = datamodel
-            datamodel = pymc.distributions.Normal('data',mu=funcdet,tau=1/sig/sig,observed=True,value=y)
-        d[datamodel.__name__ ]=datamodel
-        
+                sig = np.array(datamodel)
+            d['data'] = pymc.distributions.Normal('data',mu=funcdet,tau=1/sig/sig,observed=True,value=y)
+
         return pymc.MCMC(d)
-    
+
 class CompositeModel(FunctionModel):
     """
     This model contains a group of :class:`FunctionModel` objects joined by
