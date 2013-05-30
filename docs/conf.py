@@ -250,7 +250,7 @@ intersphinx_mapping = {'http://docs.python.org/': None,
                        'numpy':('http://docs.scipy.org/doc/numpy/',None),
                        'scipy':('http://docs.scipy.org/doc/scipy/reference/',None),
                        'matplotlib':('http://matplotlib.sourceforge.net/',None),
-                       'pymc':('http://pymc.googlecode.com/svn/doc/',None),
+                       'pymc':('https://pymcmc.readthedocs.org/en/latest/',None),
                        'astropysics':('http://packages.python.org/Astropysics/',None)}
 
 autoclass_content = 'both'
