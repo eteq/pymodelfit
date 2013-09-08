@@ -19,6 +19,8 @@ Internal utility functions used in pymodelfit - most of these are lifted from
 
 from contextlib import contextmanager
 
+import numpy as np
+
 #all of these are CGS
 me = 9.1093897e-28 #electron mass
 kb = 1.3807e-16 #boltzmann's constant
