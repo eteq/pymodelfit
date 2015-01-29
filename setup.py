@@ -2,7 +2,15 @@
 #Copyright (c) 2011 Erik Tollerud (erik.tollerud@gmail.com)
 from __future__ import division, with_statement
 
+from sys import version_info
 from glob import glob
+
+#A dirty hack to get around some early import/configurations ambiguities
+if version_info[0] >= 3:
+    import builtins
+else:
+    import __builtin__ as builtins
+builtins._PYMODELFIT_SETUP_ = True
 
 import ez_setup
 from setuptools import setup, find_packages
@@ -38,6 +46,7 @@ cmdclassd = {}
 if mod_build_sphinx is not None:
     cmdclassd['build_sphinx'] = mod_build_sphinx
 
+
 setup(name='PyModelFit',
       version=versionstr,
       description='Data-fitting and Model-building package',
@@ -52,5 +61,6 @@ setup(name='PyModelFit',
       license='Apache License 2.0',
       url='http:http://packages.python.org/PyModelFit/',
       long_description=descrip,
-      cmdclass=cmdclassd
+      cmdclass=cmdclassd,
+      use_2to3=True
      )

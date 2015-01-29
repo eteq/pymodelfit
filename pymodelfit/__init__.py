@@ -24,6 +24,11 @@ _bugfix = None
 version = str(_majorversion) + '.' + str(_minorversion) + \
           ('' if _bugfix is None else ('.'+str(_bugfix))) + \
           ('' if _release else 'dev')
+try:
+    _PYMODELFIT_SETUP_
+except:
+    _PYMODELFIT_SETUP_ = False
 
-from core import *
-from builtins import * #do this to register all the builtins
+if not _PYMODELFIT_SETUP_:
+    from .core import *
+    from .builtins import * #do this to register all the builtins
