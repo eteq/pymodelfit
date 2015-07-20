@@ -1052,6 +1052,8 @@ class FunctionModel(ParametricModel):
                 if weights is not None:
                     #only flip last axis
                     kwargs['weights'] = weights.T[sampi].T
+            else:
+                kwargs['weights'] = weights
 
             vs.append(self.fitData(xnew,ynew,**kwargs))
 
